@@ -2,26 +2,26 @@
 
 ## Технологии
  
-*Язык и платформа:* 
+1. **Язык и платформа:**
 - Java 22
 - Spring Boot 3.3.2
 - Spring Framework 6.1.x (наследуется от Spring Boot)
   
-*Базы данных:*
+2. **Базы данных:**
 - PostgreSQL (42.7.3)
 - Spring Data JPA
   
-*Веб-технологии:*
+3. **Веб-технологии:**
 - Spring Web
 - Spring Actuator
   
-*Микросервисная инфраструктура:*
+4. **Микросервисная инфраструктура:**
 - Spring Cloud 2023.0.3
 - Eureka Server
 - Eureka Client
 - OpenFeign
   
-*Вспомогательные инструменты:*
+5. **Вспомогательные инструменты:**
 - Lombok
 - Spring Boot Maven Plugin
 - Docker
