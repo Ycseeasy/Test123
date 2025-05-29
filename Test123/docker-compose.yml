@@ -1,0 +1,103 @@
+services:
+  discovery-micro:
+    deploy:
+      resources:
+        limits:
+          memory: 768M
+          cpus: '0.5'
+    build: ./discoveryMicro
+    container_name: discovery-service
+    ports:
+      - "8761:8761"
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8761/actuator/health || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 30
+      start_period: 40s
+
+  user-service:
+    build: ./user
+    container_name: user-service
+    ports:
+      - "8081:8081"
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://discovery-service:8761/eureka/
+      - EUREKA_INSTANCE_APPNAME=USER-SERVICE
+      - EUREKA_INSTANCE_PREFERIPADDRESS=true
+      - EUREKA_CLIENT_REGISTER_WITH_EUREKA=true
+      - EUREKA_CLIENT_FETCH_REGISTRY=true
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://user-db:5432/userdb
+      - SPRING_DATASOURCE_USERNAME=ycse
+      - SPRING_DATASOURCE_PASSWORD=qwerty12341
+      - SPRING_DATASOURCE_HIKARI_CONNECTION_TIMEOUT=30000
+      - EUREKA_CLIENT_INITIAL_INSTANCE_INFO_REPLICATION_INTERVAL_SECONDS=5
+    depends_on:
+      discovery-micro:
+        condition: service_started
+      user-db:
+        condition: service_healthy
+
+  company-service:
+    build: ./company
+    container_name: company-service
+    ports:
+      - "8082:8082"
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://discovery-micro:8761/eureka/
+      - EUREKA_INSTANCE_APPNAME=COMPANIES-SERVICE
+      - EUREKA_INSTANCE_PREFERIPADDRESS=true
+      - EUREKA_CLIENT_REGISTER_WITH_EUREKA=true
+      - EUREKA_CLIENT_FETCH_REGISTRY=true
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://company-db:5432/companydb
+      - SPRING_DATASOURCE_USERNAME=ycse
+      - SPRING_DATASOURCE_PASSWORD=qwerty12341
+      - SPRING_DATASOURCE_HIKARI_CONNECTION_TIMEOUT=30000
+      - EUREKA_CLIENT_INITIAL_INSTANCE_INFO_REPLICATION_INTERVAL_SECONDS=5
+    depends_on:
+      discovery-micro:
+        condition: service_started
+      company-db:
+        condition: service_healthy
+
+  user-db:
+    image: postgres:16.3
+    container_name: user-db
+    ports:
+      - "5433:5432"
+    environment:
+      - POSTGRES_DB=userdb
+      - POSTGRES_USER=ycse
+      - POSTGRES_PASSWORD=qwerty12341
+    volumes:
+      - user-data:/var/lib/postgresql/data
+    healthcheck:
+      test: pg_isready -U ycse -d userdb
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  company-db:
+    image: postgres:16.3
+    container_name: company-db
+    ports:
+      - "5434:5432"
+    environment:
+      - POSTGRES_DB=companydb
+      - POSTGRES_USER=ycse
+      - POSTGRES_PASSWORD=qwerty12341
+    volumes:
+      - company-data:/var/lib/postgresql/data
+    healthcheck:
+      test: pg_isready -U ycse -d companydb
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  user-data:
+  company-data:
