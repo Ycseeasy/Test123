@@ -1,5 +1,30 @@
 # ТЗ Микросервисы
 
+## Технологии
+ 
+*Язык и платформа:* 
+- Java 22
+- Spring Boot 3.3.2
+- Spring Framework 6.1.x (наследуется от Spring Boot)
+  
+*Базы данных:*
+- PostgreSQL (42.7.3)
+- Spring Data JPA
+  
+*Веб-технологии:*
+- Spring Web
+- Spring Actuator
+  
+*Микросервисная инфраструктура:*
+- Spring Cloud 2023.0.3
+- Eureka Server
+- Eureka Client
+- OpenFeign
+  
+*Вспомогательные инструменты:*
+- Lombok
+- Spring Boot Maven Plugin
+
 ## Архитектура сервисов
 
 1. **Сервис пользователей**
