@@ -14,17 +14,18 @@
 3. **Веб-технологии:**
 - Spring Web
 - Spring Actuator
+- REST API
   
 4. **Микросервисная инфраструктура:**
 - Spring Cloud 2023.0.3
 - Eureka Server
 - Eureka Client
 - OpenFeign
+- Docker (+ Docker Compose)
   
 5. **Вспомогательные инструменты:**
 - Lombok
 - Spring Boot Maven Plugin
-- Docker
 
 ## Архитектура сервисов
 
