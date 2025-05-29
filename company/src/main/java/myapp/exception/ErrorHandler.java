@@ -17,6 +17,7 @@ public class ErrorHandler {
         );
     }
 
+    @ExceptionHandler
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorResponse handleUpdException(final UpdException e) {
         return new ErrorResponse(
@@ -25,8 +26,18 @@ public class ErrorHandler {
         );
     }
 
+    @ExceptionHandler
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorResponse handleAlreadyExistsException(final AlreadyExistsException e) {
+        return new ErrorResponse(
+                "Validation error",
+                e.getMessage()
+        );
+    }
+
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorResponse handleCompanyDeleteException(final CompanyDeleteException e) {
         return new ErrorResponse(
                 "Validation error",
                 e.getMessage()
