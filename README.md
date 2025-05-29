@@ -24,6 +24,7 @@
 *Вспомогательные инструменты:*
 - Lombok
 - Spring Boot Maven Plugin
+- Docker
 
 ## Архитектура сервисов
 
