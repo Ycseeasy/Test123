@@ -22,9 +22,9 @@
 
 ## Доступ к сервисам
 
-Eureka Dashboard: http://localhost:8761
-Сервис пользователей: http://localhost:8082/companies**
-Сервис компаний: http://localhost:8081/users**
+   - Eureka Dashboard: http://localhost:8761
+   - Сервис пользователей: http://localhost:8082/companies**
+   - Сервис компаний: http://localhost:8081/users**
 
 ## API Эндпоинты
 
