@@ -15,6 +15,7 @@
 - Spring Web
 - Spring Actuator
 - REST API
+- API Gateway
   
 4. **Микросервисная инфраструктура:**
 - Spring Cloud 2023.0.3
