@@ -16,6 +16,7 @@
         <module>company</module>
         <module>user</module>
         <module>discoveryMicro</module>
+        <module>apiGateway</module>
     </modules>
 
     <groupId>com.github.Ycseeasy</groupId>
@@ -42,10 +43,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
